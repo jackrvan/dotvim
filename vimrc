@@ -1,7 +1,4 @@
-set number
-set tabstop=4
-set softtabstop=0 noexpandtab
-set shiftwidth=4
+set number   
 syntax on
 set background=dark
 let g:gruvbox_contrast_dark = 'hard'
@@ -22,6 +19,9 @@ set foldmethod=indent
 set foldlevelstart=20
 let g:airline#extensions#tabline#enabled = 1
 set relativenumber
+set tabstop=8
+set softtabstop=0 expandtab
+set shiftwidth=4 smarttab
 
 nnoremap 0 ^
 nnoremap ; :
@@ -34,12 +34,12 @@ xnoremap <leader>p "_dP
 nnoremap <F2> <C-q>:call CommentUncomment()<cr>
 
 function! CommentUncomment()
-	let first=getline('.')[0]
-	if first == "#"
-		:.s/^#//g
-	else
-		:.s/^/#/g
-	endif
+    let first=getline('.')[0]
+    if first == "#"
+        :.s/^#//g
+    else
+        :.s/^/#/g
+    endif
 endfunction
 
 map <ESC>[1;5D <C-Left>
