@@ -16,3 +16,6 @@
 [submodule "/home/jack/.vim/bundle/nerdtree"]
 	path = bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
+[submodule "bundle/vim-dirdiff"]
+	path = bundle/vim-dirdiff
+	url = https://github.com/will133/vim-dirdiff.git
