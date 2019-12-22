@@ -11,7 +11,7 @@ filetype indent plugin on
 set clipboard=unnamedplus
 vnoremap d "_d
 set hlsearch
-hi Search ctermbg=Yellow
+hi Search ctermbg=White
 hi Search ctermfg=DarkRed
 set novisualbell
 set updatetime=100
