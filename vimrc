@@ -1,3 +1,6 @@
+""""""""""
+" Settings
+""""""""""
 set number   
 syntax on
 set background=dark
@@ -9,7 +12,6 @@ set ignorecase
 filetype plugin on
 filetype indent plugin on
 set clipboard=unnamedplus
-vnoremap d "_d
 set hlsearch
 hi Search ctermbg=Yellow
 hi Search ctermfg=DarkRed
@@ -21,30 +23,67 @@ set relativenumber
 set tabstop=8
 set softtabstop=0 expandtab
 set shiftwidth=4 smarttab
+set showbreak=------>
 
+"""""""""
+" Plugins
+"""""""""
 execute pathogen#infect()
-let g:DirDiffExcludes = '*mlchar_config*,*metrics*'
+let g:DirDiffExcludes = '*mlchar_config*,*metrics*,*database*,*.db*'
 let g:airline#extensions#tabline#enabled = 1
+set wildignore+=*/darth/test-objects/*
+set wildignore+=*/darth/results/*
+set wildignore+=*/.git/*
+set wildignore+="*.pyc
+set nocst
 
+"set runtimepath-=~/.vim/bundle/csv.vim
+"set runtimepath-=~/.vim/bundle/ctrlp.vim
+"set runtimepath-=~/.vim/bundle/nerdtree
+"set runtimepath-=~/.vim/bundle/vim-airline
+"set runtimepath-=~/.vim/bundle/vim-dirdiff
+"set runtimepath-=~/.vim/bundle/vim-startify
+
+""""""
+" Maps
+""""""
 nnoremap 0 ^
 nnoremap ; :
+nnoremap <F3> :bp<cr>
+nnoremap <F4> :bn<cr>
 nnoremap <F7> :tabp<cr>
 nnoremap <F8> :tabn<cr>
+nnoremap <F12> <Esc>/^[a-z_]\+_parsers\?=<CR>
 nnoremap <leader>d "_d
-xnoremap <leader>d "_d
-xnoremap <leader>p "_dP
 nnoremap c ]c
 nnoremap C [c
-nnoremap <S-Enter> O<Esc>
-nnoremap <CR> o<Esc>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <space> za
+nnoremap <S-F> :CtrlP<CR>
+nnoremap bn :bn<cr>
+nnoremap bp :bp<cr>
+nnoremap <leader>d "_d
+nnoremap <leader>p "_dP
 
-nnoremap <F2> <C-q>:call CommentUncomment()<cr>
+inoremap <C-F> <C-X><C-F>
+inoremap qq <Esc>
+
+vnoremap d "_d
 
 command W w
 command Wa wa
 command Q q
 command Qa qa
+command DarthLogCleanup g/debug\| memory /d
 
+
+"""""""""""
+" Functions
+"""""""""""
+nnoremap <F2> :call CommentUncomment()<cr>
 function! CommentUncomment()
     let first=getline('.')[0]
     if first == "#"
@@ -54,22 +93,12 @@ function! CommentUncomment()
     endif
 endfunction
 
-command -nargs=+ DeletePP :call DeletePPFunc(<f-args>)
-function DeletePPFunc(...)
-    for arg in a:000
-        let line_num = search('- post_processor_name: ' . arg)
-        if line_num == 0
-            continue
-        endif
-        let end_line = search('- post_processor_name: ')
-        if end_line == 0
-            let end_line = line('$')
-        elseif end_line <= line_num
-            let end_line = line('$')
-        else
-            let end_line = end_line - 1
-        endif
-        execute line_num.','.end_line.'d'
-    endfor
+command -nargs=0 WhatCell :call GetCell()
+function! GetCell()
+    let temp = search('cell \?(.*)', 'bn')
+    if temp <= line('.')
+        echo getline(temp)
+    else
+        echo "None"
+    endif
 endfunction
-
