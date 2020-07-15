@@ -13,7 +13,7 @@ filetype plugin on
 filetype indent plugin on
 set clipboard=unnamedplus
 set hlsearch
-hi Search ctermbg=Yellow
+hi Search ctermbg=White
 hi Search ctermfg=DarkRed
 set novisualbell
 set updatetime=100
