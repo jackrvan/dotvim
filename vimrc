@@ -25,11 +25,13 @@ set softtabstop=0 expandtab
 set shiftwidth=4 smarttab
 set showbreak=------>
 
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
 """""""""
 " Plugins
 """""""""
 execute pathogen#infect()
-let g:DirDiffExcludes = '*mlchar_config*,*metrics*,*database*,*.db*'
+let g:DirDiffExcludes = '*mlchar_config*,*metrics*,*database*,*.db*,*.pkl'
 let g:airline#extensions#tabline#enabled = 1
 set wildignore+=*/darth/test-objects/*
 set wildignore+=*/darth/results/*
