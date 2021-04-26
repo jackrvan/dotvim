@@ -31,10 +31,8 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 " Plugins
 """""""""
 execute pathogen#infect()
-let g:DirDiffExcludes = '*mlchar_config*,*metrics*,*database*,*.db*,*.pkl'
+"let g:DirDiffExcludes = ''
 let g:airline#extensions#tabline#enabled = 1
-set wildignore+=*/darth/test-objects/*
-set wildignore+=*/darth/results/*
 set wildignore+=*/.git/*
 set wildignore+="*.pyc
 set nocst
@@ -55,7 +53,6 @@ nnoremap <F3> :bp<cr>
 nnoremap <F4> :bn<cr>
 nnoremap <F7> :tabp<cr>
 nnoremap <F8> :tabn<cr>
-nnoremap <F12> <Esc>/^[a-z_]\+_parsers\?=<CR>
 nnoremap <leader>d "_d
 nnoremap c ]c
 nnoremap C [c
@@ -79,7 +76,6 @@ command W w
 command Wa wa
 command Q q
 command Qa qa
-command DarthLogCleanup g/debug\| memory /d
 
 
 """""""""""
@@ -92,15 +88,5 @@ function! CommentUncomment()
         :.s/^#//g
     else
         :.s/^/#/g
-    endif
-endfunction
-
-command -nargs=0 WhatCell :call GetCell()
-function! GetCell()
-    let temp = search('cell \?(.*)', 'bn')
-    if temp <= line('.')
-        echo getline(temp)
-    else
-        echo "None"
     endif
 endfunction
