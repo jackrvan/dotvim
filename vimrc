@@ -36,9 +36,11 @@ let g:airline#extensions#tabline#enabled = 1
 set wildignore+=*/.git/*
 set wildignore+="*.pyc
 set nocst
+set rtp+=/home/jack/apps/fzf
+let g:pydocstring_doq_path = '/home/jack/.local/bin/doq'
+let g:pydocstring_formatter = 'google'
 
 "set runtimepath-=~/.vim/bundle/csv.vim
-"set runtimepath-=~/.vim/bundle/ctrlp.vim
 "set runtimepath-=~/.vim/bundle/nerdtree
 "set runtimepath-=~/.vim/bundle/vim-airline
 "set runtimepath-=~/.vim/bundle/vim-dirdiff
@@ -61,16 +63,21 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <space> za
-nnoremap <S-F> :CtrlP<CR>
-nnoremap bn :bn<cr>
-nnoremap bp :bp<cr>
+nnoremap <C-p> :Files<CR>
+nnoremap bn :w<cr>:bn<cr>
+nnoremap bp :w<cr>:bp<cr>
 nnoremap <leader>d "_d
 nnoremap <leader>p "_dP
+
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-d> :Pydocstring<CR>
 
 inoremap <C-F> <C-X><C-F>
 inoremap qq <Esc>
 
 vnoremap d "_d
+
+map <leader>r :NERDTreeFind<cr>
 
 command W w
 command Wa wa
@@ -89,4 +96,19 @@ function! CommentUncomment()
     else
         :.s/^/#/g
     endif
+endfunction
+
+" sync open file with NERDTree
+" " Check if NERDTree is open or active
+function! IsNERDTreeOpen()
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+" file, and we're not in vimdiff
+function! SyncTree()
+  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
 endfunction

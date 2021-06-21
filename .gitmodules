@@ -27,10 +27,16 @@
 	url = https://github.com/will133/vim-dirdiff.git
 [submodule "bundle/YouCompleteMe"]
 	path = bundle/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe.git
+	url = https://github.com/ycm-core/YouCompleteMe.git
 [submodule "bundle/csv.vim"]
 	path = bundle/csv.vim
 	url = https://github.com/chrisbra/csv.vim.git
 [submodule "/home/jvanier/.vim/bundle/bufexplorer.vim"]
 	path = /home/jvanier/.vim/bundle/bufexplorer.vim
 	url = https://github.com/jlanzarotta/bufexplorer.git
+[submodule "bundle/fzf.vim"]
+	path = bundle/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
+[submodule "bundle/vim-pydocstring"]
+	path = bundle/vim-pydocstring
+	url = https://github.com/heavenshell/vim-pydocstring.git
