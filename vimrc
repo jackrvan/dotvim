@@ -1,3 +1,7 @@
+"set runtimepath^=~/.vim runtimepath+=~/.vim/after
+"let &packpath=&runtimepath
+"source ~/.vimrc
+
 """"""""""
 " Settings
 """"""""""
@@ -42,8 +46,9 @@ set nocst
 set rtp+=/home/jack/apps/fzf
 let g:pydocstring_templates_path = '/home/jack/.vim/template'
 let g:pydocstring_doq_path = '/home/jack/.local/bin/doq'
-"let g:pydocstring_formatter = 'jacks_template'
 let g:python3_host_prog = '/home/jack/venv/nvim/bin/python'
+let g:pydocstring_formatter = 'google'
+let g:pydocstring_doq_path = '/home/jack/Documents/mealcost/mealcost-venv/bin/doq'
 
 "set runtimepath-=~/.vim/bundle/csv.vim
 "set runtimepath-=~/.vim/bundle/nerdtree
